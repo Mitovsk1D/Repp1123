@@ -54,4 +54,9 @@ class User extends Authenticatable
     public function messagesReceived() {
         return $this->hasMany(Message::class, 'receiver_id');
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
 }
