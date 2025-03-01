@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id(); // Primary key for the subscription record
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Links subscription to a user
             $table->string('email')->unique(); // The user's email for receiving the newsletter
-            $table->enum('subscription_status', ['active', 'inactive'])->default('active'); // Subscription status
+            $table->enum('subscription_at', ['active', 'inactive'])->default('active'); // Subscription status
             $table->timestamps(); // Created_at and updated_at timestamps
         });
     }

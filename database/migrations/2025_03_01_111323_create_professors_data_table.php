@@ -18,9 +18,9 @@ class CreateProfessorsDataTable extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key referencing users table
             $table->string('position'); // Job position of the professor
             $table->string('company'); // Company/Institution the professor is affiliated with
-            $table->enum('gender', ['Male', 'Female', 'Other']); // Gender of the professor
+            $table->enum('gender', ['Male', 'Female']); // Gender of the professor
             $table->date('birth_date'); // Birth date of the professor
-            $table->text('work_experience')->nullable(); // Work experience description (optional)
+            $table->text('work_experience_years')->nullable(); // Work experience description (optional)
             $table->timestamps(); // Created_at and updated_at timestamps
         });
     }

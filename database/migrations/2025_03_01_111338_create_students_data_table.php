@@ -16,7 +16,7 @@ class CreateStudentsDataTable extends Migration
         Schema::create('student_data', function (Blueprint $table) {
             $table->id(); // Primary key for the student data
             $table->unsignedBigInteger('user_id'); // Foreign key to link to the user table
-            $table->enum('gender', ['Male', 'Female', 'Other'])->nullable(); // Gender field
+            $table->enum('gender', ['Male', 'Female'])->nullable(); // Gender field
             $table->date('birth_date')->nullable(); // Birth date
             $table->string('school_year')->nullable(); // School year (e.g., Freshman, Sophomore)
             $table->string('field_of_study')->nullable(); // Field of study (e.g., Computer Science)

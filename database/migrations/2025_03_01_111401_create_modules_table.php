@@ -10,8 +10,7 @@ return new class extends Migration {
         Schema::create('modules', function (Blueprint $table) {
             $table->id(); // Primary key
             $table->foreignId('course_id')->constrained('courses')->onDelete('cascade'); // Foreign key linking to courses
-            $table->string('title'); // Title of the module
-            $table->text('description')->nullable(); // Optional description of the module
+            $table->string('name'); // Name of the module
             $table->integer('order'); // Order of the module in the course
             $table->timestamps(); // Created_at and updated_at timestamps
         });

@@ -16,7 +16,6 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id(); // Primary key for the category
             $table->string('name')->unique(); // Name of the category, e.g., Science, Math, Literature
-            $table->text('description')->nullable(); // Optional description of the category
             $table->timestamps(); // Timestamps for created_at and updated_at
         });
     }

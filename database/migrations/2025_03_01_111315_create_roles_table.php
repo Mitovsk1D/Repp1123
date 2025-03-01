@@ -14,12 +14,11 @@ class CreateRolesTable extends Migration
     public function up()
     {
         Schema::create('roles', function (Blueprint $table) {
-            $table->id(); // Primary key
-            $table->string('name')->unique(); // The name of the role (admin, professor, student)
-            $table->text('description')->nullable(); // Optional description for the role
-            $table->timestamps(); // Timestamps for created_at and updated_at
-        });
-    }
+            $table->id(); // Auto-increment primary key
+            $table->string('name'); // Role name (e.g., Admin, Professor, Student)
+            $table->timestamps();
+        }); // Closing the Schema::create properly
+    } // <-- Missing closing brace was added here
 
     /**
      * Reverse the migrations.

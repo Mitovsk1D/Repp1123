@@ -13,9 +13,12 @@ return new class extends Migration {
             $table->string('email')->unique(); // Unique email for login
             $table->string('password'); // Encrypted password
             $table->string('profile_picture')->nullable(); // Nullable profile picture field
-            $table->enum('role', ['admin', 'professor', 'student'])->default('student'); // Enum for user role
+            $table->enum('role_id', ['admin', 'professor', 'student'])->default('student'); // Enum for user role
             $table->timestamps(); // Adds created_at and updated_at
         });
+
+
+
     }
 
     public function down(): void
