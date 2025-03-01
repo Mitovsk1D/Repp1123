@@ -19,7 +19,11 @@ class UserController extends BaseController
      */
     public function profile(Request $request)
     {
-        $user = Auth::user();
+        $user = User::find(Auth::id());
+
+        if (!$user) {
+            return $this->sendError('Unauthorized.', [], 401);
+        }
 
         // Load related data based on user role
         if ($user->role === 'student') {
@@ -39,7 +43,11 @@ class UserController extends BaseController
      */
     public function updateProfile(Request $request)
     {
-        $user = Auth::user();
+        $user = User::find(Auth::id());
+
+        if (!$user) {
+            return $this->sendError('Unauthorized.', [], 401);
+        }
 
         $validator = Validator::make($request->all(), [
             'name' => 'sometimes|string|max:255',
@@ -103,7 +111,7 @@ class UserController extends BaseController
         }
 
         // Reload user with updated data
-        $user->refresh();
+        $user = User::find(Auth::id());
 
         if ($user->role === 'student') {
             $user->load('studentData');

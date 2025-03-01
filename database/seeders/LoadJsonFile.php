@@ -29,22 +29,22 @@ class LoadJsonDataSeeder extends Seeder
         // Load data for each model with its corresponding JSON file
         $this->loadModelData(Category::class, 'categories.json');
         $this->loadModelData(Course::class, 'courses.json');
-        #$this->loadModelData(CourseProfessor::class, 'course_professors.json');
-        #$this->loadModelData(ForumComment::class, 'forum_comments.json');
-        #$this->loadModelData(ForumThread::class, 'forum_threads.json');
-       # $this->loadModelData(Interest::class, 'interests.json');
+        $this->loadModelData(CourseProfessor::class, 'course_professors.json');
+        $this->loadModelData(ForumComment::class, 'forum_comments.json');
+        $this->loadModelData(ForumThread::class, 'forum_threads.json');
+        $this->loadModelData(Interest::class, 'interests.json');
+        $this->loadModelData(NewsletterSubscription::class, 'newsletter_subscriptions.json');
+        $this->loadModelData(StudentInterest::class, 'student_interests.json');
         $this->loadModelData(Lesson::class, 'lessons.json');
         $this->loadModelData(Message::class, 'messages.json');
         $this->loadModelData(Module::class, 'modules.json');
-        #$this->loadModelData(NewsletterSubscription::class, 'newsletter_subscriptions.json');
         $this->loadModelData(ProfessorData::class, 'professors_data.json');
-        #$this->loadModelData(Review::class, 'reviews.json');
+        $this->loadModelData(Review::class, 'reviews.json');
         $this->loadModelData(Role::class, 'roles.json');
         $this->loadModelData(StudentData::class, 'student_data.json');
-       # $this->loadModelData(StudentInterest::class, 'student_interests.json');
         $this->loadModelData(User::class, 'users.json');
         $this->loadModelData(UserProgress::class, 'user_progress.json');
-        #$this->loadModelData(View::class, 'views.json');
+        $this->loadModelData(View::class, 'views.json');
     }
 
     // Helper function to load JSON data into a given model

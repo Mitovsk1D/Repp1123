@@ -145,7 +145,8 @@ class EnrollmentController extends BaseController
     public function index()
     {
         // Check if user is admin
-        if (!Auth::user()->isAdmin()) {
+        $user = User::find(Auth::id());
+        if (!$user || !$user->isAdmin()) {
             return $this->sendError('Unauthorized.', ['error' => 'You do not have permission to view all enrollments'], 403);
         }
 
@@ -170,8 +171,8 @@ class EnrollmentController extends BaseController
         }
 
         // Check if user is admin or the professor of the course
-        $user = Auth::user();
-        if (!$user->isAdmin() && !($user->isProfessor() && $course->professor_id == $user->id)) {
+        $user = User::find(Auth::id());
+        if (!$user || (!$user->isAdmin() && !($user->isProfessor() && $course->professor_id == $user->id))) {
             return $this->sendError('Unauthorized.', ['error' => 'You do not have permission to view these enrollments'], 403);
         }
 

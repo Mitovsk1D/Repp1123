@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Course;
+use App\Models\User;
 use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +51,8 @@ class CourseController extends BaseController
     public function store(Request $request)
     {
         // Check if user is admin or professor
-        if (!Auth::user()->isProfessor() && !Auth::user()->isAdmin()) {
+        $user = User::find(Auth::id());
+        if (!$user || (!$user->isProfessor() && !$user->isAdmin())) {
             return $this->sendError('Unauthorized', ['error' => 'Only professors and admins can create courses'], 403);
         }
 
@@ -67,8 +69,8 @@ class CourseController extends BaseController
         $course = Course::create($request->all());
 
         // Associate professor with course if user is a professor
-        if (Auth::user()->isProfessor()) {
-            $professorData = Auth::user()->professorData;
+        if ($user->isProfessor()) {
+            $professorData = $user->professorData;
             if ($professorData) {
                 $course->professors()->attach($professorData->id);
             }
@@ -124,10 +126,15 @@ class CourseController extends BaseController
         }
 
         // Check if user is admin or the professor of this course
-        $canEdit = Auth::user()->isAdmin();
+        $user = User::find(Auth::id());
+        if (!$user) {
+            return $this->sendError('Unauthorized.', [], 401);
+        }
 
-        if (Auth::user()->isProfessor()) {
-            $professorData = Auth::user()->professorData;
+        $canEdit = $user->isAdmin();
+
+        if ($user->isProfessor()) {
+            $professorData = $user->professorData;
             if ($professorData && $course->professors->contains($professorData->id)) {
                 $canEdit = true;
             }
@@ -161,7 +168,8 @@ class CourseController extends BaseController
     public function destroy($id)
     {
         // Only admin can delete courses
-        if (!Auth::user()->isAdmin()) {
+        $user = User::find(Auth::id());
+        if (!$user || !$user->isAdmin()) {
             return $this->sendError('Unauthorized', ['error' => 'Only administrators can delete courses'], 403);
         }
 
