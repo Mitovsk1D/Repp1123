@@ -4,24 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('modules', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // Primary key
+            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade'); // Foreign key linking to courses
+            $table->string('title'); // Title of the module
+            $table->text('description')->nullable(); // Optional description of the module
+            $table->integer('order'); // Order of the module in the course
+            $table->timestamps(); // Created_at and updated_at timestamps
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('modules');
+        Schema::dropIfExists('modules'); // Drops the table on rollback
     }
 };
