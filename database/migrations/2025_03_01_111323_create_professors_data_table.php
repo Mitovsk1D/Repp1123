@@ -15,13 +15,13 @@ class CreateProfessorsDataTable extends Migration
     {
         Schema::create('professors_data', function (Blueprint $table) {
             $table->id(); // Primary key
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Linking to the user table
-            $table->string('position'); // Professor's position (e.g., Assistant Professor, Lecturer)
-            $table->string('company'); // Company or university where the professor works
-            $table->enum('gender', ['Male', 'Female', 'Other']); // Gender field with predefined options
-            $table->date('birth_date'); // Birthdate of the professor
-            $table->text('work_experience')->nullable(); // Optional work experience field
-            $table->timestamps(); // Timestamps for created_at and updated_at
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key referencing users table
+            $table->string('position'); // Job position of the professor
+            $table->string('company'); // Company/Institution the professor is affiliated with
+            $table->enum('gender', ['Male', 'Female', 'Other']); // Gender of the professor
+            $table->date('birth_date'); // Birth date of the professor
+            $table->text('work_experience')->nullable(); // Work experience description (optional)
+            $table->timestamps(); // Created_at and updated_at timestamps
         });
     }
 
@@ -32,6 +32,6 @@ class CreateProfessorsDataTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('professors_data'); // Dropping the professors_data table
+        Schema::dropIfExists('professors_data');
     }
 }

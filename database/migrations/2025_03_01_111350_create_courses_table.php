@@ -4,24 +4,34 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateCoursesTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // Primary key for the course
+            $table->string('title'); // Title of the course
+            $table->text('description'); // Detailed description of the course
+            $table->unsignedBigInteger('category_id'); // Foreign key to the category table
+            $table->timestamps(); // Timestamps for created_at and updated_at
+
+            // Foreign key constraint to link to the categories table
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('courses');
     }
-};
+}
