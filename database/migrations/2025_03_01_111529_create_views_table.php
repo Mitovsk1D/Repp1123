@@ -20,3 +20,4 @@ return new class extends Migration {
         Schema::dropIfExists('views'); // Drops the table on rollback
     }
 };
+
